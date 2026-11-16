@@ -1,0 +1,20 @@
+{
+  "name": "ArchiSteamFarm (Community)",
+  "display_name": "ASF Home Assistant Integration",
+  "description": "Unofficial Home Assistant integration for ArchiSteamFarm",
+  "documentation": "https://github.com/MetalfanBlackness/asf-ha-community",
+  "bug_report": "https://github.com/MetalfanBlackness/asf-ha-community/issues",
+  "author": "MetalfanBlackness",
+  "license": "MIT",
+  "maintainer": "MetalfanBlackness",
+  "repository": "MetalfanBlackness/asf-ha-community",
+  "domain": "asf_ha",
+  "min_homeassistant_version": "2024.1.0",
+  "keywords": ["steam", "archisteamfarm", "asf", "gaming", "bot"],
+  "topic": "asf-ha",
+  "category": ["Integration"],
+  "type": "integration",
+  "icon": "mdi:steam",
+  "country": [],
+  "renderer": "auto"
+}
