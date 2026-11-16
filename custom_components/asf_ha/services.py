@@ -18,6 +18,11 @@ from .const import (
     SERVICE_STOP_BOT,
 )
 
+# ASF process control service names
+SERVICE_START_ASF = "start_asf"
+SERVICE_STOP_ASF = "stop_asf"
+SERVICE_RESTART_ASF = "restart_asf"
+
 _LOGGER = logging.getLogger(__name__)
 
 
@@ -61,8 +66,61 @@ async def async_setup_services(hass: HomeAssistant, entry: ConfigEntry) -> None:
         # to execute the specified command
         _LOGGER.debug(f"Would execute command: {command}")
 
+    async def handle_start_asf(call: ServiceCall) -> None:
+        """Handle start ASF service."""
+        _LOGGER.info("Starting ASF process via service")
+        
+        # Get process manager from hass.data
+        process_manager = None
+        for entry_id, data in hass.data.get(DOMAIN, {}).items():
+            process_manager = data.get("process_manager")
+            if process_manager:
+                break
+        
+        if process_manager:
+            await process_manager.async_start()
+        else:
+            _LOGGER.error("No ASF process manager found")
+
+    async def handle_stop_asf(call: ServiceCall) -> None:
+        """Handle stop ASF service."""
+        _LOGGER.info("Stopping ASF process via service")
+        
+        # Get process manager from hass.data
+        process_manager = None
+        for entry_id, data in hass.data.get(DOMAIN, {}).items():
+            process_manager = data.get("process_manager")
+            if process_manager:
+                break
+        
+        if process_manager:
+            await process_manager.async_stop()
+        else:
+            _LOGGER.error("No ASF process manager found")
+
+    async def handle_restart_asf(call: ServiceCall) -> None:
+        """Handle restart ASF service."""
+        _LOGGER.info("Restarting ASF process via service")
+        
+        # Get process manager from hass.data
+        process_manager = None
+        for entry_id, data in hass.data.get(DOMAIN, {}).items():
+            process_manager = data.get("process_manager")
+            if process_manager:
+                break
+        
+        if process_manager:
+            await process_manager.async_restart()
+        else:
+            _LOGGER.error("No ASF process manager found")
+
     # Register services
     hass.services.async_register(DOMAIN, SERVICE_RESTART_BOT, handle_restart_bot)
     hass.services.async_register(DOMAIN, SERVICE_STOP_BOT, handle_stop_bot)
     hass.services.async_register(DOMAIN, SERVICE_START_BOT, handle_start_bot)
     hass.services.async_register(DOMAIN, SERVICE_EXECUTE_COMMAND, handle_execute_command)
+    
+    # Register ASF process control services
+    hass.services.async_register(DOMAIN, SERVICE_START_ASF, handle_start_asf)
+    hass.services.async_register(DOMAIN, SERVICE_STOP_ASF, handle_stop_asf)
+    hass.services.async_register(DOMAIN, SERVICE_RESTART_ASF, handle_restart_asf)

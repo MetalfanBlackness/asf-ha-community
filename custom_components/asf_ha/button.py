@@ -42,16 +42,34 @@ async def async_setup_entry(
     async_add_entities: AddEntitiesCallback,
 ) -> None:
     """Set up the ASF button platform."""
+    from .const import DOMAIN
+    from .asf_process import ASFProcessManager
+    
     # Initialize hass.data[DOMAIN] if it doesn't exist
     if DOMAIN not in hass.data:
         hass.data[DOMAIN] = {}
+    
+    # Get process manager and check if ASF is running
+    process_manager = None
+    if entry.entry_id in hass.data[DOMAIN]:
+        process_manager = hass.data[DOMAIN][entry.entry_id].get("process_manager")
+    
+    # If process manager exists and ASF is not running, start it
+    if process_manager and not process_manager.is_running():
+        _LOGGER.info("ASF not running, attempting to start")
+        await process_manager.async_start()
+    
     coordinator = hass.data[DOMAIN].get(entry.entry_id)
     
     if coordinator is None:
         # Create a new coordinator if it doesn't exist
         from .sensor import ASFDataUpdateCoordinator
         coordinator = ASFDataUpdateCoordinator(hass, entry)
-        await coordinator.async_config_entry_first_refresh()
+        try:
+            await coordinator.async_config_entry_first_refresh()
+        except Exception as e:
+            _LOGGER.error(f"Failed to refresh coordinator: {e}")
+            return
         hass.data[DOMAIN][entry.entry_id] = coordinator
     
     # Create buttons for each bot

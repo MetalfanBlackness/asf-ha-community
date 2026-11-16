@@ -17,11 +17,15 @@ from .const import (
     DEFAULT_PORT,
     DEFAULT_WEB_PORT,
     DEFAULT_CONFIG_PATH,
+    DEFAULT_ASF_EXECUTABLE,
+    DEFAULT_AUTO_START,
     DOMAIN,
     CONF_ASF_HOST,
     CONF_ASF_PORT,
     CONF_ASF_WEB_PORT,
     CONF_ASF_CONFIG_PATH,
+    CONF_ASF_EXECUTABLE,
+    CONF_AUTO_START,
 )
 
 _LOGGER = logging.getLogger(__name__)
@@ -33,6 +37,8 @@ STEP_USER_DATA_SCHEMA = vol.Schema(
         vol.Required(CONF_ASF_PORT, default=DEFAULT_PORT): int,
         vol.Optional(CONF_ASF_WEB_PORT, default=DEFAULT_WEB_PORT): int,
         vol.Optional(CONF_ASF_CONFIG_PATH, default=DEFAULT_CONFIG_PATH): str,
+        vol.Optional(CONF_ASF_EXECUTABLE, default=DEFAULT_ASF_EXECUTABLE): str,
+        vol.Optional(CONF_AUTO_START, default=DEFAULT_AUTO_START): bool,
     }
 )
 
@@ -139,6 +145,14 @@ class OptionsFlowHandler(config_entries.OptionsFlow):
                         CONF_ASF_CONFIG_PATH,
                         default=self.config_entry.data.get(CONF_ASF_CONFIG_PATH, DEFAULT_CONFIG_PATH),
                     ): str,
+                    vol.Optional(
+                        CONF_ASF_EXECUTABLE,
+                        default=self.config_entry.data.get(CONF_ASF_EXECUTABLE, DEFAULT_ASF_EXECUTABLE),
+                    ): str,
+                    vol.Optional(
+                        CONF_AUTO_START,
+                        default=self.config_entry.data.get(CONF_AUTO_START, DEFAULT_AUTO_START),
+                    ): bool,
                 }
             ),
         )
