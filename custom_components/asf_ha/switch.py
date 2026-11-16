@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from homeassistant.components.switch import (
     SwitchEntity,
@@ -23,6 +23,9 @@ from .const import (
     ATTR_BOTS,
 )
 
+if TYPE_CHECKING:
+    from . import ASFDataUpdateCoordinator
+
 _LOGGER = logging.getLogger(__name__)
 
 
@@ -32,18 +35,8 @@ async def async_setup_entry(
     async_add_entities: AddEntitiesCallback,
 ) -> None:
     """Set up the ASF switch platform."""
-    # Initialize hass.data[DOMAIN] if it doesn't exist
-    if DOMAIN not in hass.data:
-        hass.data[DOMAIN] = {}
-    # Get the coordinator from the sensor platform
-    coordinator = hass.data[DOMAIN].get(entry.entry_id)
-    
-    if coordinator is None:
-        # Create a new coordinator if it doesn't exist
-        from .sensor import ASFDataUpdateCoordinator
-        coordinator = ASFDataUpdateCoordinator(hass, entry)
-        await coordinator.async_config_entry_first_refresh()
-        hass.data[DOMAIN][entry.entry_id] = coordinator
+    # Get the shared coordinator
+    coordinator = hass.data[DOMAIN][entry.entry_id]
     
     # Create switches for each bot
     entities: list[SwitchEntity] = []

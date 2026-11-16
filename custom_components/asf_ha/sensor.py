@@ -2,9 +2,8 @@
 
 from __future__ import annotations
 
-from datetime import timedelta
 import logging
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from homeassistant.components.sensor import (
     SensorEntity,
@@ -16,11 +15,7 @@ from homeassistant.const import EntityCategory
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
-from homeassistant.helpers.update_coordinator import (
-    CoordinatorEntity,
-    DataUpdateCoordinator,
-    UpdateFailed,
-)
+from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .const import (
     ATTR_BOTS,
@@ -33,44 +28,8 @@ from .const import (
     SENSOR_VERSION,
 )
 
-_LOGGER = logging.getLogger(__name__)
-
-
-class ASFDataUpdateCoordinator(DataUpdateCoordinator):
-    """Class to manage fetching ASF data."""
-
-    def __init__(self, hass: HomeAssistant, entry: ConfigEntry) -> None:
-        """Initialize the data update coordinator."""
-        super().__init__(
-            hass,
-            _LOGGER,
-            name=DOMAIN,
-            update_interval=timedelta(seconds=entry.options.get("scan_interval", 30)),
-        )
-        self._entry = entry
-        self._asf_data: dict[str, Any] = {}
-
-    async def _async_update_data(self) -> dict[str, Any]:
-        """Fetch data from ASF."""
-        # TODO: Implement actual ASF API calls
-        # This is a placeholder that will be replaced with real API calls
-        try:
-            # In a real implementation, this would call the ASF API
-            # For now, return mock data
-            self._asf_data = {
-                "bots_online": 2,
-                "bots_total": 3,
-                "version": "5.5.2.3",
-                "status": "Running",
-                "bots": [
-                    {"name": "Bot1", "status": "Running", "games": 5},
-                    {"name": "Bot2", "status": "Running", "games": 3},
-                    {"name": "Bot3", "status": "Offline", "games": 0},
-                ],
-            }
-            return self._asf_data
-        except Exception as e:
-            raise UpdateFailed(f"Error fetching ASF data: {e}") from e
+if TYPE_CHECKING:
+    from . import ASFDataUpdateCoordinator
 
 
 SENSOR_TYPES: list[SensorEntityDescription] = [
@@ -91,13 +50,11 @@ SENSOR_TYPES: list[SensorEntityDescription] = [
     SensorEntityDescription(
         key=SENSOR_VERSION,
         name="ASF Version",
-        state_class=SensorStateClass.MEASUREMENT,
         entity_category=EntityCategory.DIAGNOSTIC,
     ),
     SensorEntityDescription(
         key=SENSOR_STATUS,
         name="ASF Status",
-        state_class=SensorStateClass.MEASUREMENT,
         entity_category=EntityCategory.DIAGNOSTIC,
     ),
 ]
@@ -109,10 +66,8 @@ async def async_setup_entry(
     async_add_entities: AddEntitiesCallback,
 ) -> None:
     """Set up the ASF sensor platform."""
-    coordinator = ASFDataUpdateCoordinator(hass, entry)
-    
-    # Start the coordinator
-    await coordinator.async_config_entry_first_refresh()
+    # Get the shared coordinator from hass.data
+    coordinator = hass.data[DOMAIN][entry.entry_id]
     
     # Create sensors
     entities: list[SensorEntity] = []
@@ -145,9 +100,9 @@ class ASFSensor(CoordinatorEntity, SensorEntity):
         """Return the device info."""
         return DeviceInfo(
             identifiers={(DOMAIN, self._entry.entry_id)},
-            name="ArchiSteamFarm (Community)",
+            name="ArchiSteamFarm Monitor (Community)",
             manufacturer="Community",
-            model="Unofficial ASF Integration",
+            model="ASF Monitor",
         )
 
     @callback

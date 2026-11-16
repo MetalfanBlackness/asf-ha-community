@@ -1,6 +1,6 @@
 {
-  "name": "ArchiSteamFarm (Community)",
-  "display_name": "ASF Home Assistant Integration",
+  "name": "ArchiSteamFarm Monitor (Community)",
+  "display_name": "ASF Monitor (Community)",
   "description": "Unofficial Home Assistant integration for ArchiSteamFarm",
   "documentation": "https://github.com/MetalfanBlackness/asf-ha-community",
   "bug_report": "https://github.com/MetalfanBlackness/asf-ha-community/issues",

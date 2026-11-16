@@ -16,12 +16,12 @@ from .const import (
     DEFAULT_HOST,
     DEFAULT_PORT,
     DEFAULT_WEB_PORT,
-    DEFAULT_CONFIG_PATH,
+    DEFAULT_PASSWORD,
     DOMAIN,
     CONF_ASF_HOST,
     CONF_ASF_PORT,
     CONF_ASF_WEB_PORT,
-    CONF_ASF_CONFIG_PATH,
+    CONF_ASF_PASSWORD,
 )
 
 _LOGGER = logging.getLogger(__name__)
@@ -32,7 +32,7 @@ STEP_USER_DATA_SCHEMA = vol.Schema(
         vol.Required(CONF_ASF_HOST, default=DEFAULT_HOST): str,
         vol.Required(CONF_ASF_PORT, default=DEFAULT_PORT): int,
         vol.Optional(CONF_ASF_WEB_PORT, default=DEFAULT_WEB_PORT): int,
-        vol.Optional(CONF_ASF_CONFIG_PATH, default=DEFAULT_CONFIG_PATH): str,
+        vol.Optional(CONF_ASF_PASSWORD, default=DEFAULT_PASSWORD): str,
     }
 )
 
@@ -136,8 +136,8 @@ class OptionsFlowHandler(config_entries.OptionsFlow):
                         default=self.config_entry.data.get(CONF_ASF_WEB_PORT, DEFAULT_WEB_PORT),
                     ): int,
                     vol.Optional(
-                        CONF_ASF_CONFIG_PATH,
-                        default=self.config_entry.data.get(CONF_ASF_CONFIG_PATH, DEFAULT_CONFIG_PATH),
+                        CONF_ASF_PASSWORD,
+                        default=self.config_entry.data.get(CONF_ASF_PASSWORD, DEFAULT_PASSWORD),
                     ): str,
                 }
             ),

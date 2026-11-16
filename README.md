@@ -1,4 +1,4 @@
-# ⚠️ ArchiSteamFarm (Community) - Unofficial Home Assistant Integration
+# ⚠️ ArchiSteamFarm Monitor (Community) - Unofficial Home Assistant Integration
 
 **⚠️ IMPORTANT - Third-Party Integration**
 
@@ -16,7 +16,7 @@
 
 ## About
 
-A **community-developed** Home Assistant custom integration for monitoring and controlling [ArchiSteamFarm (ASF)](https://github.com/JustArchi/ArchiSteamFarm).
+A **community-developed** Home Assistant custom integration for monitoring [ArchiSteamFarm (ASF)](https://github.com/JustArchi/ArchiSteamFarm).
 
 > **Disclaimer**: This integration is a third-party, unofficial project. It is not affiliated with, endorsed by, or supported by JustArchi or the ArchiSteamFarm project. ArchiSteamFarm® is a trademark of its respective owners.
 

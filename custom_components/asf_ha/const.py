@@ -5,22 +5,19 @@ from __future__ import annotations
 from datetime import timedelta
 
 DOMAIN = "asf_ha"
-DEFAULT_NAME = "ArchiSteamFarm"
 DEFAULT_SCAN_INTERVAL = timedelta(seconds=30)
 
 # Configuration keys
 CONF_ASF_HOST = "asf_host"
 CONF_ASF_PORT = "asf_port"
-CONF_ASF_USERNAME = "asf_username"
-CONF_ASF_PASSWORD = "asf_password"
 CONF_ASF_WEB_PORT = "asf_web_port"
-CONF_ASF_CONFIG_PATH = "asf_config_path"
+CONF_ASF_PASSWORD = "asf_password"
 
 # Default values
 DEFAULT_HOST = "localhost"
 DEFAULT_PORT = 1242
 DEFAULT_WEB_PORT = 1242
-DEFAULT_CONFIG_PATH = "asf"
+DEFAULT_PASSWORD = ""
 
 # ASF API endpoints
 ASF_API_BASE = "http://{host}:{port}/Api/ASF"

@@ -6,16 +6,6 @@
       "Enabled": true,
       "SteamLogin": "your_bot_username",
       "SteamPassword": "your_bot_password",
-      "SteamParentLogin": "your_parent_username",
-      "SteamParentPassword": "your_parent_password",
-      "FarmingPreferences": 15,
-      "IdlePriority": 0,
-      "SendTradeOffers": true,
-      "AcceptDonations": true,
-      "MaxTrades": 5,
-      "MaxMarketTransactions": 5,
-      "HandleOfflineMessages": true,
-      "SendOnMobile": true,
       "IsBotAccount": true
     }
   ],
@@ -24,23 +14,6 @@
     "ConnectionString": "Data Source=ASF.db"
   },
   "IPC": {
-    "Enabled": true,
-    "Host": "0.0.0.0",
-    "Port": 1242,
-    "Password": ""
-  },
-  "Logging": {
-    "Level": "Debug",
-    "Output": "File",
-    "FilePath": "logs/ASF.log",
-    "MaxSize": 10,
-    "MaxFiles": 5
-  },
-  "plugins": {
-    "Enabled": true,
-    "Directories": ["plugins"]
-  },
-  "Web": {
     "Enabled": true,
     "Host": "0.0.0.0",
     "Port": 1242,

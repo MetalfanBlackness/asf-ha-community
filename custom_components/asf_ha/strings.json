@@ -1,6 +1,6 @@
 {
-  "title": "ArchiSteamFarm (Community)",
-  "description": "Unofficial community integration for monitoring and controlling ArchiSteamFarm (ASF) bots. NOT supported by ASF developers.",
+  "title": "ArchiSteamFarm Monitor (Community)",
+  "description": "Unofficial community integration for monitoring ArchiSteamFarm (ASF) bots. NOT supported by ASF developers.",
   "config": {
     "asf_host": {
       "name": "ASF Host",
@@ -14,9 +14,9 @@
       "name": "ASF Web Port",
       "description": "Web interface port for ArchiSteamFarm"
     },
-    "asf_config_path": {
-      "name": "Config Subdirectory",
-      "description": "Subdirectory in Home Assistant config folder for ASF configuration (e.g., 'asf' or 'asf/config')"
+    "asf_password": {
+      "name": "ASF Password",
+      "description": "IPC/Web password for ArchiSteamFarm (leave empty if not configured)"
     }
   },
   "errors": {

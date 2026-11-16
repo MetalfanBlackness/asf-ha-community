@@ -1,6 +1,6 @@
 {
   "domain": "asf_ha",
-  "name": "ArchiSteamFarm (Community)",
+  "name": "ArchiSteamFarm Monitor (Community)",
   "documentation": "https://github.com/YOUR_USERNAME/asf-ha",
   "issue_tracker": "https://github.com/YOUR_USERNAME/asf-ha/issues",
   "dependencies": [],
