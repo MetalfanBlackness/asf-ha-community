@@ -15,16 +15,12 @@ CONF_ASF_USERNAME = "asf_username"
 CONF_ASF_PASSWORD = "asf_password"
 CONF_ASF_WEB_PORT = "asf_web_port"
 CONF_ASF_CONFIG_PATH = "asf_config_path"
-CONF_ASF_EXECUTABLE = "asf_executable"
-CONF_AUTO_START = "auto_start"
 
 # Default values
 DEFAULT_HOST = "localhost"
 DEFAULT_PORT = 1242
 DEFAULT_WEB_PORT = 1242
 DEFAULT_CONFIG_PATH = "asf"
-DEFAULT_ASF_EXECUTABLE = "ASF"
-DEFAULT_AUTO_START = True
 
 # ASF API endpoints
 ASF_API_BASE = "http://{host}:{port}/Api/ASF"
