@@ -12,6 +12,8 @@ from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 
 from .const import (
     DOMAIN,
+    CONF_ASF_HOST,
+    CONF_ASF_PORT,
     CONF_ASF_PASSWORD,
     ASF_API_BASE,
     ASF_API_COMMAND,
