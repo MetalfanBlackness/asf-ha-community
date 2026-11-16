@@ -32,6 +32,9 @@ async def async_setup_entry(
     async_add_entities: AddEntitiesCallback,
 ) -> None:
     """Set up the ASF switch platform."""
+    # Initialize hass.data[DOMAIN] if it doesn't exist
+    if DOMAIN not in hass.data:
+        hass.data[DOMAIN] = {}
     # Get the coordinator from the sensor platform
     coordinator = hass.data[DOMAIN].get(entry.entry_id)
     

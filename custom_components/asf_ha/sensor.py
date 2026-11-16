@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from datetime import timedelta
 import logging
 from typing import Any
 
@@ -44,7 +45,7 @@ class ASFDataUpdateCoordinator(DataUpdateCoordinator):
             hass,
             _LOGGER,
             name=DOMAIN,
-            update_interval=entry.options.get("scan_interval", 30),
+            update_interval=timedelta(seconds=entry.options.get("scan_interval", 30)),
         )
         self._entry = entry
         self._asf_data: dict[str, Any] = {}
