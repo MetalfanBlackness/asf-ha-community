@@ -1,0 +1,13 @@
+# Requirements for ASF Home Assistant Integration
+# This file is for development purposes only
+# Home Assistant integration requirements are handled through manifest.json
+
+# For development and testing
+pylint==3.0.0
+yapf==0.40.1
+mypy==1.4.1
+
+# For Home Assistant integration development
+homeassistant==2024.6.0
+pytest==7.4.0
+pytest-homeassistant-custom-component==0.13.62

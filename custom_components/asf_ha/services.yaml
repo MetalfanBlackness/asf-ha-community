@@ -1,0 +1,39 @@
+restart_bot:
+  name: Restart ASF bot
+  description: Restart a specific ArchiSteamFarm bot
+  fields:
+    bot_name:
+      name: Bot name
+      description: Name of the bot to restart
+      required: true
+      example: "Bot1"
+
+stop_bot:
+  name: Stop ASF bot
+  description: Stop a specific ArchiSteamFarm bot
+  fields:
+    bot_name:
+      name: Bot name
+      description: Name of the bot to stop
+      required: true
+      example: "Bot1"
+
+start_bot:
+  name: Start ASF bot
+  description: Start a specific ArchiSteamFarm bot
+  fields:
+    bot_name:
+      name: Bot name
+      description: Name of the bot to start
+      required: true
+      example: "Bot1"
+
+execute_command:
+  name: Execute ASF command
+  description: Execute a custom command on ArchiSteamFarm
+  fields:
+    command:
+      name: Command
+      description: ASF command to execute
+      required: true
+      example: "stats"

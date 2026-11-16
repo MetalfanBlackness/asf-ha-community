@@ -1,0 +1,34 @@
+{
+  "title": "ArchiSteamFarm (Community)",
+  "description": "Unofficial community integration for monitoring and controlling ArchiSteamFarm (ASF) bots. NOT supported by ASF developers.",
+  "config": {
+    "asf_host": {
+      "name": "ASF Host",
+      "description": "IP address or hostname where ArchiSteamFarm is running"
+    },
+    "asf_port": {
+      "name": "ASF IPC Port",
+      "description": "IPC port that ArchiSteamFarm is listening on"
+    },
+    "asf_web_port": {
+      "name": "ASF Web Port",
+      "description": "Web interface port for ArchiSteamFarm"
+    },
+    "asf_config_path": {
+      "name": "Config Subdirectory",
+      "description": "Subdirectory in Home Assistant config folder for ASF configuration (e.g., 'asf' or 'asf/config')"
+    }
+  },
+  "errors": {
+    "cannot_connect": "Cannot connect to ASF",
+    "invalid_host": "Invalid host",
+    "invalid_port": "Invalid port",
+    "unknown": "Unknown error"
+  },
+  "options": {
+    "scan_interval": {
+      "name": "Scan interval",
+      "description": "How frequently to update ASF data (in seconds)"
+    }
+  }
+}

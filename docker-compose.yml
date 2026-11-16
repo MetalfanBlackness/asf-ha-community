@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  archisteamfarm:
+    image: justarchi/archisteamfarm:latest
+    container_name: archisteamfarm
+    restart: unless-stopped
+    volumes:
+      - ./config:/app/config
+      - ./logs:/app/logs
+    ports:
+      - "1242:1242"
+    environment:
+      - ASF tradición_CULTURE=EN
+    # Add your ASF configuration environment variables here
+    # Example:
+    # - SteamUsername=your_username
+    # - SteamPassword=your_password
+    networks:
+      - asf_network
+
+networks:
+  asf_network:
+    driver: bridge

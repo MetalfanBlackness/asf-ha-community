@@ -1,0 +1,20 @@
+{
+  "domain": "asf_ha",
+  "name": "ArchiSteamFarm (Community)",
+  "documentation": "https://github.com/YOUR_USERNAME/asf-ha",
+  "issue_tracker": "https://github.com/YOUR_USERNAME/asf-ha/issues",
+  "dependencies": [],
+  "codeowners": ["@your-github-username"],
+  "requirements": [],
+  "iot_class": "local_polling",
+  "version": "1.0.0",
+  "description": "Unofficial Home Assistant integration for ArchiSteamFarm",
+  "config_flow": true,
+  "data": [
+    {
+      "name": "ASF",
+      "type": "string",
+      "encryption": false
+    }
+  ]
+}
