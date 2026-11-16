@@ -6,6 +6,7 @@
   "bug_report": "https://github.com/MetalfanBlackness/asf-ha-community/issues",
   "author": "MetalfanBlackness",
   "license": "MIT",
+  "version": "0.0.1",
   "maintainer": "MetalfanBlackness",
   "repository": "MetalfanBlackness/asf-ha-community",
   "domain": "asf_ha",
