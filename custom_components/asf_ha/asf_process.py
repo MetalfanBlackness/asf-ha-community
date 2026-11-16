@@ -86,7 +86,7 @@ class ASFProcessManager:
             self._process = None
             return False
 
-        # Wait for ASF to be ready
+        # Wait for ASF to be ready (optional - tries with aiohttp, falls back to time delay)
         await self._wait_for_ready()
 
         return True
@@ -145,32 +145,39 @@ class ASFProcessManager:
 
     async def _wait_for_ready(self, timeout: int = 30) -> bool:
         """Wait for ASF to be ready to accept connections."""
+        # Try with aiohttp if available
         try:
             import aiohttp
             import async_timeout
+            has_aiohttp = True
         except ImportError:
-            _LOGGER.error("aiohttp not available, cannot check ASF readiness")
-            return True
+            has_aiohttp = False
+            _LOGGER.debug("aiohttp not available, using time-based wait")
 
         host = self.entry_data.get(CONF_ASF_HOST, DEFAULT_HOST)
         port = self.entry_data.get(CONF_ASF_PORT, DEFAULT_PORT)
 
-        url = f"http://{host}:{port}/Api/ASF/Version"
-
-        for attempt in range(timeout):
-            try:
-                async with async_timeout.timeout(1):
-                    async with aiohttp.ClientSession() as session:
-                        async with session.get(url) as response:
-                            if response.status == 200:
-                                _LOGGER.info("ASF is ready")
-                                return True
-            except Exception as e:
-                _LOGGER.debug(f"ASF not ready yet (attempt {attempt + 1}/{timeout}): {e}")
-                await asyncio.sleep(1)
-
-        _LOGGER.error("ASF did not become ready within timeout")
-        return False
+        if has_aiohttp:
+            url = f"http://{host}:{port}/Api/ASF/Version"
+            for attempt in range(timeout):
+                try:
+                    async with async_timeout.timeout(1):
+                        async with aiohttp.ClientSession() as session:
+                            async with session.get(url) as response:
+                                if response.status == 200:
+                                    _LOGGER.info("ASF is ready")
+                                    return True
+                except Exception as e:
+                    _LOGGER.debug(f"ASF not ready yet (attempt {attempt + 1}/{timeout}): {e}")
+                    await asyncio.sleep(1)
+            _LOGGER.warning("ASF did not become ready within timeout, but process started")
+            return True
+        else:
+            # No aiohttp, just wait a fixed time
+            _LOGGER.info("Waiting for ASF to start (no readiness check available)")
+            await asyncio.sleep(5)
+            _LOGGER.info("ASF should be ready")
+            return True
 
     def _create_default_config(self) -> None:
         """Create a default ASF configuration file."""
