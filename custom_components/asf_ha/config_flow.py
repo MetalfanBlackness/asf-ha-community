@@ -105,10 +105,10 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
 class OptionsFlowHandler(config_entries.OptionsFlow):
     """Handle options flow for ArchiSteamFarm."""
-
+    
     def __init__(self, config_entry: config_entries.ConfigEntry) -> None:
         """Initialize options flow."""
-        super().__init__(config_entry)
+        self._config_entry = config_entry
         self.options = dict(config_entry.options or {})
 
     async def async_step_init(
@@ -125,19 +125,19 @@ class OptionsFlowHandler(config_entries.OptionsFlow):
                 {
                     vol.Optional(
                         CONF_ASF_HOST,
-                        default=self.config_entry.data.get(CONF_ASF_HOST, DEFAULT_HOST),
+                        default=self._config_entry.data.get(CONF_ASF_HOST, DEFAULT_HOST),
                     ): str,
                     vol.Optional(
                         CONF_ASF_PORT,
-                        default=self.config_entry.data.get(CONF_ASF_PORT, DEFAULT_PORT),
+                        default=self._config_entry.data.get(CONF_ASF_PORT, DEFAULT_PORT),
                     ): int,
                     vol.Optional(
                         CONF_ASF_WEB_PORT,
-                        default=self.config_entry.data.get(CONF_ASF_WEB_PORT, DEFAULT_WEB_PORT),
+                        default=self._config_entry.data.get(CONF_ASF_WEB_PORT, DEFAULT_WEB_PORT),
                     ): int,
                     vol.Optional(
                         CONF_ASF_PASSWORD,
-                        default=self.config_entry.data.get(CONF_ASF_PASSWORD, DEFAULT_PASSWORD),
+                        default=self._config_entry.data.get(CONF_ASF_PASSWORD, DEFAULT_PASSWORD),
                     ): str,
                 }
             ),
